@@ -2,16 +2,31 @@
 
 namespace App\Exports;
 
-use App\Patient;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class PatientsExport implements FromCollection
+class PatientsExport implements FromView
 {
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function collection()
+    /*public function collection()
     {
-        return Patient::all();
+    $diseases = DB::table('patients')
+    ->select('disease_code')
+    ->distinct('disease_code')
+    //->groupBy('class_code')
+    ->get();
+    //return Patient::all();
+    return $diseases;
+    }*/
+
+    public function view(): View
+    {
+        $patients = DB::table('patients')
+            ->leftJoin('diseases', 'patients.disease_code', '=', 'diseases.disease_code')
+            ->select('patients.id', 'no_rm', 'treatment_type', 'name', 'birthday', 'gender', 'patients.disease_code', 'domicile',
+                'patient_type', 'entry_date', 'exit_date', 'payment_type', 'release_note', 'diseases.disease_name')
+            ->get();
+        $listOfDiseases = null;
+        return view('recaps.dataKesakitanExport');
     }
 }

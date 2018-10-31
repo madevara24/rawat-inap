@@ -25,7 +25,8 @@ class PatientsController extends Controller
             ->leftJoin('diseases', 'patients.disease_code', '=', 'diseases.disease_code')
             ->select('patients.id', 'no_rm', 'treatment_type', 'name', 'birthday', 'gender', 'patients.disease_code', 'domicile',
                 'patient_type', 'entry_date', 'exit_date', 'payment_type', 'release_note', 'diseases.disease_name')
-            ->get();
+            ->paginate(8);
+            //->get();
 
         //return $patients;
         return view('patients.index', compact('patients'));
@@ -50,11 +51,13 @@ class PatientsController extends Controller
      */
     public function store(Request $request)
     {
+        //return $request;
         $request->validate([
             'no_rm' => 'required',
             'treatment_type' => 'required',
             'name' => 'required',
             'birthday' => 'required',
+            'age_class' => 'required',
             'gender' => 'required',
             'disease_code' => 'required',
             'domicile' => 'required',
@@ -69,6 +72,7 @@ class PatientsController extends Controller
             'name' => $request->get('name'),
             'treatment_type' => $request->get('treatment_type'),
             'birthday' => $request->get('birthday'),
+            'age_class' => $request->get('age_class'),
             'gender' => $request->get('gender'),
             'disease_code' => $request->get('disease_code'),
             'domicile' => $request->get('domicile'),
@@ -103,6 +107,8 @@ class PatientsController extends Controller
     {
         $patient = DB::table('patients')
             ->leftJoin('diseases', 'patients.disease_code', '=', 'diseases.disease_code')
+            ->select('patients.id', 'no_rm', 'treatment_type', 'name', 'birthday', 'gender', 'patients.disease_code', 'domicile',
+                'patient_type', 'entry_date', 'exit_date', 'payment_type', 'release_note', 'diseases.disease_name')
             ->where('patients.id', '=', $id)
             ->get();
 
@@ -127,6 +133,7 @@ class PatientsController extends Controller
             'treatment_type' => 'required',
             'name' => 'required',
             'birthday' => 'required',
+            'age_class' => 'required',
             'gender' => 'required',
             'disease_code' => 'required',
             'domicile' => 'required',
@@ -142,6 +149,7 @@ class PatientsController extends Controller
         $patient->treatment_type = $request->input('treatment_type');
         $patient->name = $request->input('name');
         $patient->birthday = $request->input('birthday');
+        $patient->age_class = $request->input('age_class');
         $patient->gender = $request->input('gender');
         $patient->disease_code = $request->input('disease_code');
         $patient->domicile = $request->input('domicile');

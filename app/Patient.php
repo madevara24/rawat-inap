@@ -11,6 +11,7 @@ class Patient extends Model
         'treatment_type',
         'name',
         'birthday',
+        'age_class',
         'gender',
         'disease_code',
         'domicile',

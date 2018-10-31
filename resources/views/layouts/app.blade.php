@@ -27,7 +27,7 @@
         @include('inc.navbar')
     @endguest
         <main role="main" class="container">
-            <div class="py-4">
+            <div class="py-2">
                 
             </div>
             @yield('content')

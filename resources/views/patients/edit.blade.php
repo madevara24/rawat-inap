@@ -53,10 +53,21 @@
                           <div class="form-row">
                             <div class="col-md-6">
                                 <label for="birthday">Tanggal Lahir</label>
-                                <input type="date" class="form-control" id="birthday" name="birthday" onload=setAge() onchange=setAge()
+                                <input type="date" class="form-control" id="birthday" name="birthday" onchange=onChangeBirthday()
                                 value="{{ $patient[0]->birthday }}">
                             </div>
                             <script>
+                              function onChangeBirthday(){
+                                setAge();
+                                if(document.getElementById("entry_date").value != null)
+                                  setAgeClass();
+                              }
+    
+                              function onChangeEntryDate(){
+                                if(document.getElementById("birthday").value != null)
+                                  setAgeClass();
+                              }
+    
                               function setAge(){
                                 var birthday = new Date($('#birthday').val());
                                 var today = new Date();
@@ -68,10 +79,62 @@
                                 }
                                 document.getElementById("age").value = age;
                               }
+    
+                              function setAgeClass(){
+                                var birthday = new Date($('#birthday').val());
+                                var entry_date = new Date($('#entry_date').val());
+                                var year_diff = entry_date.getFullYear() - birthday.getFullYear();
+                                var day_diff = parseInt((entry_date.getTime() - birthday.getTime())/(24*3600*1000));
+                                if(entry_date.getMonth()<=birthday.getMonth()){
+                                  if(entry_date.getDate()<birthday.getDate()){
+                                    year_diff -=1;
+                                  }
+                                }
+                                if(year_diff > 0){
+                                  if(year_diff<5)
+                                    document.getElementById("age_class").value = 3;
+                                  else if(year_diff<6)
+                                    document.getElementById("age_class").value = 4;
+                                  else if(year_diff<10)
+                                    document.getElementById("age_class").value = 5;
+                                  else if(year_diff<12)
+                                    document.getElementById("age_class").value = 6;
+                                  else if(year_diff<15)
+                                    document.getElementById("age_class").value = 7;
+                                  else if(year_diff<18)
+                                    document.getElementById("age_class").value = 8;
+                                  else if(year_diff<20)
+                                    document.getElementById("age_class").value = 9;
+                                  else if(year_diff<25)
+                                    document.getElementById("age_class").value = 10;
+                                  else if(year_diff<35)
+                                    document.getElementById("age_class").value = 11;
+                                  else if(year_diff<45)
+                                    document.getElementById("age_class").value = 12;
+                                  else if(year_diff<55)
+                                    document.getElementById("age_class").value = 13;
+                                  else if(year_diff<60)
+                                    document.getElementById("age_class").value = 14;
+                                  else if(year_diff<65)
+                                    document.getElementById("age_class").value = 15;
+                                  else if(year_diff<70)
+                                    document.getElementById("age_class").value = 16;
+                                  else
+                                    document.getElementById("age_class").value = 17;
+                                }else{
+                                  if(day_diff < 8)
+                                    document.getElementById("age_class").value = 0;
+                                  else if(day_diff<29)
+                                    document.getElementById("age_class").value = 1;
+                                  else
+                                    document.getElementById("age_class").value = 2;
+                                }
+                              }
                             </script>
                             <div class="col-md-6">
                                 <label for="age">Umur</label>
                                 <input type="text" class="form-control" id="age" name="age" disabled>
+                                <input type="hidden" id="age_class" name="age_class">
                             </div>
                           </div>
                         </div>
@@ -127,7 +190,7 @@
                           <div class="form-row">
                             <div class="col-md-6">
                               <label for="entry_date">Tanggal Masuk</label>
-                              <input type="date" class="form-control" id="entry_date" name="entry_date" value="{{ $patient[0]->entry_date }}">
+                              <input type="date" class="form-control" id="entry_date" name="entry_date" value="{{ $patient[0]->entry_date }}" onchange=onChangeEntryDate()>
                             </div>
                             <div class="col-md-6">
                               <label for="exit_date">Tanggal Keluar</label>
