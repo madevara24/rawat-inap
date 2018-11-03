@@ -2,9 +2,12 @@
 <table class="table table-striped table-sm">
             <thead class="thead-dark text-center">
                 <tr>
+                    <th colspan="79">Rekap Data Kesakitan Bulan</th>
+                </tr>
+                <tr>
                     <th rowspan="3">Kode DX</th>
                     <th rowspan="3">Nama Penyakit</th>    
-                    <th rowspan="3">Nama Penyakit</th>
+                    <th rowspan="3">Total</th>
                     <th colspan="4">Jumlah</th>
                     <th colspan="4">0-7 HR</th>
                     <th colspan="4">8-28 HR</th>
@@ -24,7 +27,6 @@
                     <th colspan="4">60-64 TH</th>
                     <th colspan="4">65-69 TH</th>
                     <th colspan="4">>=70 TH</th>
-                    <th colspan="2" rowspan="3" class="text-center">Aksi</th>
                 </tr>
                 <tr>
                     @for ($i = 0; $i < 19; $i++)
@@ -40,5 +42,17 @@
                     </tr>
             </thead>
             <tbody>
+                @for ($i = 0; $i < count($listOfDiseases); $i++)
+                    <tr>
+                        <td>{{$listOfDiseases[$i]->disease_code}}</td>
+                        <td>{{$listOfDiseases[$i]->disease_name}}</td>
+                        <td>{{$totals[$i]}}</td>
+                        @foreach ($results[$i] as $resultv2)
+                            @foreach ($resultv2 as $resultv3)
+                                <td>{{$resultv3}}</td>
+                            @endforeach
+                        @endforeach
+                    </tr>
+                @endfor
             </tbody>
         </table>

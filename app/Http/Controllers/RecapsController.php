@@ -28,52 +28,54 @@ class RecapsController extends Controller
     public function checkQuery()
     {
         $listOfDiseases = DB::table('patients')
-            ->select('disease_code')
-            ->distinct('disease_code')
+            ->leftJoin('diseases', 'patients.disease_code', '=', 'diseases.disease_code')
+            ->select('patients.disease_code','diseases.disease_name')
+            ->distinct('patients.disease_code')
             ->get();
+            
 
         for ($i = 0; $i < count($listOfDiseases); $i++) {
-            $result[$i][0] = DB::table('patients')
+            $totals[$i] = DB::table('patients')
                 ->where('disease_code', $listOfDiseases[$i]->disease_code)
                 ->count();
 
-            $result[$i][1] = DB::table('patients')
+            $results[$i][0][0] = DB::table('patients')
                 ->where('disease_code', $listOfDiseases[$i]->disease_code)
                 ->where([['gender', 'Laki-Laki'], ['patient_type', 'Baru']])
                 ->count();
-            $result[$i][2] = DB::table('patients')
+            $results[$i][0][1] = DB::table('patients')
                 ->where('disease_code', $listOfDiseases[$i]->disease_code)
                 ->where([['gender', 'Laki-Laki'], ['patient_type', 'Lama']])
                 ->count();
-            $result[$i][3] = DB::table('patients')
+            $results[$i][0][2] = DB::table('patients')
                 ->where('disease_code', $listOfDiseases[$i]->disease_code)
                 ->where([['gender', 'Perempuan'], ['patient_type', 'Baru']])
                 ->count();
-            $result[$i][4] = DB::table('patients')
+            $results[$i][0][3] = DB::table('patients')
                 ->where('disease_code', $listOfDiseases[$i]->disease_code)
                 ->where([['gender', 'Perempuan'], ['patient_type', 'Lama']])
                 ->count();
 
-            for ($j = 5; $j < 73; $j += 4) {
-                $result[$i][$j] = DB::table('patients')
+            for ($j = 0; $j < 18; $j ++) {
+                $results[$i][$j+1][0] = DB::table('patients')
                     ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                    ->where([['gender', 'Laki-Laki'], ['patient_type', 'Baru'],['age_class',(($j-5)/4)]])
+                    ->where([['gender', 'Laki-Laki'], ['patient_type', 'Baru'],['age_class',$j]])
                     ->count();
-                $result[$i][$j + 1] = DB::table('patients')
+                $results[$i][$j+1][1] = DB::table('patients')
                     ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                    ->where([['gender', 'Laki-Laki'], ['patient_type', 'Lama'],['age_class',(($j-5)/4)]])
+                    ->where([['gender', 'Laki-Laki'], ['patient_type', 'Lama'],['age_class',$j]])
                     ->count();
-                $result[$i][$j + 2] = DB::table('patients')
+                $results[$i][$j+1][2] = DB::table('patients')
                     ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                    ->where([['gender', 'Perempuan'], ['patient_type', 'Baru'],['age_class',(($j-5)/4)]])
+                    ->where([['gender', 'Perempuan'], ['patient_type', 'Baru'],['age_class',$j]])
                     ->count();
-                $result[$i][$j + 3] = DB::table('patients')
+                $results[$i][$j+1][3] = DB::table('patients')
                     ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                    ->where([['gender', 'Perempuan'], ['patient_type', 'Lama'],['age_class',(($j-5)/4)]])
+                    ->where([['gender', 'Perempuan'], ['patient_type', 'Lama'],['age_class',$j]])
                     ->count();
             }
         }
 
-        return compact('listOfDiseases', 'result');
+        return compact('listOfDiseases','totals', 'results');
     }
 }
