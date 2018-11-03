@@ -26,7 +26,9 @@ class PatientsExport implements FromView
             ->select('patients.id', 'no_rm', 'treatment_type', 'name', 'birthday', 'gender', 'patients.disease_code', 'domicile',
                 'patient_type', 'entry_date', 'exit_date', 'payment_type', 'release_note', 'diseases.disease_name')
             ->get();
-        $listOfDiseases = null;
+        $listOfDiseases = DB::table('patients')
+            ->distinct('disease_code')
+            ->get();
         return view('recaps.dataKesakitanExport');
     }
 }

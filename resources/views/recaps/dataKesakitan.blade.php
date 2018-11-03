@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row justify-content-center">
+    <div class="row justify-content-center flex-row flex-nowrap">
         <h1 class="py-2">Data Kesakitan</h1>
         <table class="table table-striped table-sm">
             <thead class="thead-dark text-center">
                 <tr>
                     <th rowspan="3">Kode DX</th>
                     <th rowspan="3">Nama Penyakit</th>    
-                    <th rowspan="3">Nama Penyakit</th>
+                    <th rowspan="3">Total</th>
                     <th colspan="4">Jumlah</th>
                     <th colspan="4">0-7 HR</th>
                     <th colspan="4">8-28 HR</th>
                     <th colspan="4">29-1 TH</th>
                     <th colspan="4">1-4 TH</th>
-                    <th colspan="4">5-<6 TH</th>
+                    <th colspan="4">{{"5-<6 TH"}}</th>
                     <th colspan="4">6-9 TH</th>
                     <th colspan="4">10-11 TH</th>
                     <th colspan="4">12-14 TH</th>

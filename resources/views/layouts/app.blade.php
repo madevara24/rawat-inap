@@ -21,12 +21,18 @@
     
     
 </head>
+<style>
+    .scrollableHorizontal{
+        overflow: auto;
+        white-space: nowrap;
+    }
+</style>
 <body>
     @guest
     @else
         @include('inc.navbar')
     @endguest
-        <main role="main" class="container">
+        <main role="main" class="container-fluid">
             <div class="py-2">
                 
             </div>

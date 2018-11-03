@@ -25,3 +25,4 @@ Route::get('/recaps/dataKesakitan', 'RecapsController@dataKesakitan')->name('dat
 Route::get('/recaps/topTen', 'RecapsController@topTen')->name('topTen');
 
 Route::get('/recaps/download', 'RecapsController@exportPatient')->name('exportPatient');
+Route::get('/recaps/query', 'RecapsController@checkQuery')->name('checkQuery');
