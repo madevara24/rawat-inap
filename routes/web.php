@@ -26,3 +26,4 @@ Route::get('/recaps/topTen', 'RecapsController@topTen')->name('topTen');
 
 Route::get('/recaps/download', 'RecapsController@exportPatient')->name('exportPatient');
 Route::get('/recaps/query', 'RecapsController@checkQuery')->name('checkQuery');
+Route::post('/recaps/testForm', 'RecapsController@testForm')->name('testForm');

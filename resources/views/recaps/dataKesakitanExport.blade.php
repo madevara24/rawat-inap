@@ -2,7 +2,7 @@
 <table class="table table-striped table-sm">
             <thead class="thead-dark text-center">
                 <tr>
-                    <th colspan="79">Rekap Data Kesakitan Bulan</th>
+                    <th colspan="79">Rekap Data Kesakitan Bulan {{$time[1]." Tahun ".$time[0]}}</th>
                 </tr>
                 <tr>
                     <th rowspan="3">Kode DX</th>

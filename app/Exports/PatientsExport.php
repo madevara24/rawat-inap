@@ -2,74 +2,34 @@
 
 namespace App\Exports;
 
-use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\FromView;
+use App\Exports\RecapPerMonthExport;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class PatientsExport implements FromView
+class PatientsExport implements WithMultipleSheets
 {
-    /*public function collection()
+    use Exportable;
+
+    protected $year;
+    protected $months;
+
+    public function __construct(int $year, array $months)
     {
-    $diseases = DB::table('patients')
-    ->select('disease_code')
-    ->distinct('disease_code')
-    //->groupBy('class_code')
-    ->get();
-    //return Patient::all();
-    return $diseases;
-    }*/
+        $this->year = $year;
+        $this->months = $months;
+    }
 
-    public function view(): View
+    public function sheets(): array
     {
-        $listOfDiseases = DB::table('patients')
-            ->leftJoin('diseases', 'patients.disease_code', '=', 'diseases.disease_code')
-            ->select('patients.disease_code','diseases.disease_name')
-            ->distinct('patients.disease_code')
-            ->get();
-            
+        $sheets = [];
 
-        for ($i = 0; $i < count($listOfDiseases); $i++) {
-            $totals[$i] = DB::table('patients')
-                ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                ->count();
-
-            $results[$i][0][0] = DB::table('patients')
-                ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                ->where([['gender', 'Laki-Laki'], ['patient_type', 'Baru']])
-                ->count();
-            $results[$i][0][1] = DB::table('patients')
-                ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                ->where([['gender', 'Laki-Laki'], ['patient_type', 'Lama']])
-                ->count();
-            $results[$i][0][2] = DB::table('patients')
-                ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                ->where([['gender', 'Perempuan'], ['patient_type', 'Baru']])
-                ->count();
-            $results[$i][0][3] = DB::table('patients')
-                ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                ->where([['gender', 'Perempuan'], ['patient_type', 'Lama']])
-                ->count();
-
-            for ($j = 0; $j < 18; $j ++) {
-                $results[$i][$j+1][0] = DB::table('patients')
-                    ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                    ->where([['gender', 'Laki-Laki'], ['patient_type', 'Baru'],['age_class',$j]])
-                    ->count();
-                $results[$i][$j+1][1] = DB::table('patients')
-                    ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                    ->where([['gender', 'Laki-Laki'], ['patient_type', 'Lama'],['age_class',$j]])
-                    ->count();
-                $results[$i][$j+1][2] = DB::table('patients')
-                    ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                    ->where([['gender', 'Perempuan'], ['patient_type', 'Baru'],['age_class',$j]])
-                    ->count();
-                $results[$i][$j+1][3] = DB::table('patients')
-                    ->where('disease_code', $listOfDiseases[$i]->disease_code)
-                    ->where([['gender', 'Perempuan'], ['patient_type', 'Lama'],['age_class',$j]])
-                    ->count();
+        for ($i = 0; $i < 12; $i++) {
+            if ($this->months[$i] == 1) {
+                $sheets[] = new RecapPerMonthExport($this->year, $i + 1);
             }
+
         }
 
-        return view('recaps.dataKesakitanExport', compact('listOfDiseases','totals', 'results'));
+        return $sheets;
     }
 }
