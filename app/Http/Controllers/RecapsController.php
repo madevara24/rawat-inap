@@ -34,7 +34,12 @@ class RecapsController extends Controller
         return Excel::download(new PatientsExport, 'patients.xlsx');
     }
 
-    public function testForm(Request $request)
+    public function requestSandbox(Request $request)
+    {
+        return $request;
+    }
+
+    public function downloadCountRecap(Request $request)
     {
         $year = $request->year;
         $months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -91,14 +96,14 @@ class RecapsController extends Controller
         return compact('year', 'months');
     }
 
-    public function checkQuery()
+    public function querySandbox()
     {
-        $results = DB::table('patients')
+        $query = DB::table('patients')
             ->select('birthday')
             ->whereYear('birthday', '2018')
             ->whereMonth('birthday', '10')
             ->get();
 
-        return compact('results');
+        return compact('query');
     }
 }

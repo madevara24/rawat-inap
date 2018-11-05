@@ -16,7 +16,7 @@
                     </ul>
                   </div><br />
                   @endif
-                  {!! Form::open(['action'=>'RecapsController@testForm','method'=>'POST', 'enctype' =>'multipart/data'] ) !!}
+                  {!! Form::open(['action'=>'RecapsController@downloadCountRecap','method'=>'POST', 'enctype' =>'multipart/data'] ) !!}
                   <div class="form-group">
                         <div class="form-row">
                           <div class="col-md-4">

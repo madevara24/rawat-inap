@@ -2,23 +2,31 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <h1 class="py-2">Pasien</h1>
+        <h1 class="py-2">Register Rawat Inap</h1>
+    </div>
+    <div class="row">
+        <input type="month" id="month" name="month" onchange="">
+    </div>
+    <div class="row justify-content-center">
         <table class="table table-striped table-sm">
             <thead class="thead-dark">
                 <tr class="text-center">
                     <th>No RM</th>
-                    <th>Nama</th>    
+                    <th class="align-middle">Nama</th>    
                     <th>Tanggal Lahir</th>
+                    <th class="align-middle">Umur</th>
                     <th>Jenis Kelamin</th>
-                    <th>Domisili</th>
-                    <th>Jenis Pasien</th>
                     <th>Jenis Perawatan</th>
-                    <th>Nama Penyakit</th>
-                    <th>Jenis Pembayaran</th>
+                    <th>Jenis Pasien</th>
+                    <th class="align-middle">Domisili</th>
+                    <th class="align-middle">Diagnosis</th>
+                    <th>Kode Diagnosis</th>
                     <th>Tanggal Masuk</th>
                     <th>Tanggal Keluar</th>
-                    <th>Ket. Keluar</th>
-                    <th colspan="2" class="text-center">Aksi</th>
+                    <th>Lama Dirawat</th>
+                    <th>Keterangan Keluar</th>
+                    <th>Jenis Pembayaran</th>
+                    <th colspan="2" class="align-middle">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,15 +35,18 @@
                     <td>{{$patient->no_rm}}</td>
                     <td>{{$patient->name}}</td>
                     <td>{{$patient->birthday}}</td>
+                    <td>{{$patient->age}}</td>
                     <td>{{$patient->gender}}</td>
-                    <td>{{$patient->domicile}}</td>
-                    <td>{{$patient->patient_type}}</td>
                     <td>{{$patient->treatment_type}}</td>
-                    <td>{{$patient->disease_code." ".$patient->disease_name}}</td>
-                    <td>{{$patient->payment_type}}</td>
+                    <td>{{$patient->patient_type}}</td>
+                    <td>{{$patient->domicile}}</td>
+                    <td>{{$patient->disease_name}}</td>
+                    <td>{{$patient->disease_code}}</td>
                     <td>{{$patient->entry_date}}</td>
                     <td>{{$patient->exit_date}}</td>
+                    <td class="text-right">{{$patient->duration}} Hari</td>
                     <td>{{$patient->release_note}}</td>
+                    <td>{{$patient->payment_type}}</td>
                     <td><a href="{{ route('patients.edit',$patient->id)}}" class="btn btn-primary btn-sm" class="text-center">Edit</a></td>
                     <td>
                         {!!Form::open(['action' => ['PatientsController@destroy',$patient->id], 'method' => 'POST', 'class' => 'text-center'])!!}

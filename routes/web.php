@@ -25,5 +25,6 @@ Route::get('/recaps/dataKesakitan', 'RecapsController@dataKesakitan')->name('dat
 Route::get('/recaps/topTen', 'RecapsController@topTen')->name('topTen');
 
 Route::get('/recaps/download', 'RecapsController@exportPatient')->name('exportPatient');
-Route::get('/recaps/query', 'RecapsController@checkQuery')->name('checkQuery');
-Route::post('/recaps/testForm', 'RecapsController@testForm')->name('testForm');
+Route::get('/recaps/querySandbox', 'RecapsController@querySandbox')->name('querySandbox');
+Route::post('/recaps/requestSandbox', 'RecapsController@requestSandbox')->name('requestSandbox');
+Route::post('/recaps/downloadCountRecap', 'RecapsController@downloadCountRecap')->name('downloadCountRecap');

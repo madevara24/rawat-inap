@@ -12,6 +12,7 @@ class Patient extends Model
         'name',
         'birthday',
         'age_class',
+        'age',
         'gender',
         'disease_code',
         'domicile',
