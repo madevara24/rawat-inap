@@ -6,7 +6,7 @@ use App\Exports\RecapPerMonthExport;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class PatientsExport implements WithMultipleSheets
+class DiseaseCountRecapsExport implements WithMultipleSheets
 {
     use Exportable;
 
@@ -27,9 +27,7 @@ class PatientsExport implements WithMultipleSheets
             if ($this->months[$i] == 1) {
                 $sheets[] = new RecapPerMonthExport($this->year, $i + 1);
             }
-
         }
-
         return $sheets;
     }
 }

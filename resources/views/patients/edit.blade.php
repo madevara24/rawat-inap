@@ -133,7 +133,7 @@
                             </script>
                             <div class="col-md-6">
                                 <label for="age">Umur</label>
-                                <input type="text" class="form-control" id="age" name="age" disabled>
+                                <input type="text" class="form-control" id="age" name="age" readonly>
                                 <input type="hidden" id="age_class" name="age_class">
                             </div>
                           </div>

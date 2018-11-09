@@ -13,7 +13,6 @@ class PatientsController extends Controller
     {
         $this->middleware('auth');
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -30,8 +29,10 @@ class PatientsController extends Controller
         //->get();
 
         foreach ($patients as $patient) {
-            if($patient->duration<1)
+            if ($patient->duration < 1) {
                 $patient->duration = 1;
+            }
+
         }
         //return $patients;
         return view('patients.index', compact('patients'));
@@ -90,7 +91,7 @@ class PatientsController extends Controller
             'release_note' => $request->get('release_note'),
         ]);
         $patient->save();
-        return redirect('/patients')->with('success', 'Pasien Berhasil Ditambahkan');
+        return redirect('/recaps/treatmentRegistration')->with('success', 'Pasien Berhasil Ditambahkan');
     }
 
     /**
@@ -169,7 +170,7 @@ class PatientsController extends Controller
         $patient->release_note = $request->input('release_note');
 
         $patient->save();
-        return redirect('/patients')->with('success', 'Pasien Berhasil Diperbarui');
+        return redirect('/recaps/treatmentRegistration')->with('success', 'Pasien Berhasil Diperbarui');
     }
 
     /**
@@ -183,6 +184,6 @@ class PatientsController extends Controller
         $patient = Patient::find($id);
         $patient->delete();
 
-        return redirect('/patients')->with('success', 'Pasien Berhasil Dihapus');
+        return redirect('/recaps/treatmentRegistration')->with('success', 'Pasien Berhasil Dihapus');
     }
 }

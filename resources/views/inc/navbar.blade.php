@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ url('/') }}">
-        {{ config('app.name', 'Rawat Inap') }}
+        <img src="/images/logo-puskesmas.png" width="30" height="30" alt="">Puskesmas Nglegok
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Data Pasien</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/patients">Data Pasien</a>
+                    <a class="dropdown-item" href="/recaps/treatmentRegistration">Data Pasien</a>
                     <a class="dropdown-item" href="/patients/create">Entry Data Pasien</a>
                     <div role="separator" class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/recaps/dataKesakitan">Data Kesakitan</a>
