@@ -207,6 +207,7 @@
                                 <option value="UM">UM</option>
                                 <option value="ASK">ASK</option>
                                 <option value="JAMKESMAS">JAMKESMAS</option>
+                                <option value="JAMKESDA">JAMKESDA</option>
                                 <option value="BPJS">BPJS</option>
                                 <option value="KIS">KIS</option>
                                 <option value="SPM">SPM</option>

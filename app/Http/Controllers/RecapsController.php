@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\DiseaseCountRecapsExport;
 use App\Exports\TreatmentRegistrationsExport;
 use App\Exports\TopTensExport;
+use App\Disease;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,38 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class RecapsController extends Controller
 {
+    //PELAYANAN PERAWATAN FUNCTIONS
+    public function treatmentRecaps(){
+        $years[0] = DB::table('patients')
+            ->select(DB::raw('extract(year from exit_date) as year'))
+            ->orderBy('exit_date', 'asc')
+            ->first();
+        $years[1] = DB::table('patients')
+            ->select(DB::raw('extract(year from exit_date) as year'))
+            ->orderBy('exit_date', 'desc')
+            ->first();
+
+        return view('recaps.treatmentRecaps', compact('years'));
+    }
+
+    public function treatmentRecapsExport(Request $request){
+        $year = $request->year;
+        $months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        if ($request->month_jan) {$months[0] = 1;}
+        if ($request->month_feb) {$months[1] = 1;}
+        if ($request->month_mar) {$months[2] = 1;}
+        if ($request->month_apr) {$months[3] = 1;}
+        if ($request->month_may) {$months[4] = 1;}
+        if ($request->month_jun) {$months[5] = 1;}
+        if ($request->month_jul) {$months[6] = 1;}
+        if ($request->month_aug) {$months[7] = 1;}
+        if ($request->month_sep) {$months[8] = 1;}
+        if ($request->month_oct) {$months[9] = 1;}
+        if ($request->month_nov) {$months[10] = 1;}
+        if ($request->month_dec) {$months[11] = 1;}
+
+        return (new TreatmentRecapsExport($year, $months))->download('Rekap Pelayanan Perawatan Tahun ' . $year . '.xlsx');
+    }
     //REGISTRASI RAWAT INAP FUNCTIONS
     public function treatmentRegistrationRedirect(Request $request){
         return $this->treatmentRegistration($request->year,$request->month);
@@ -50,6 +83,11 @@ class RecapsController extends Controller
         if (!$year || !$month) {
             $year = date('Y');
             $month = date('n');
+        }
+
+        if((DB::table('patients')->select(DB::raw('count(id) as count'))->pluck('count'))[0] < 1){
+            $diseases = Disease::all();
+            return view('patients.create', compact('diseases'))->with('success', 'Data pasien masih kosong, mohon diisi dahulu');
         }
 
         $option['first'] = (DB::table('patients')
@@ -243,7 +281,7 @@ class RecapsController extends Controller
         return view('recaps.topTen', compact('result', 'disease_count', 'option', 'request', 'year', 'month'));
     }
 
-    //MBUH FUNCTIONS
+    //MISC FUNCTIONS
     public function exportPatient()
     {
         return Excel::download(new DiseaseCountRecapsExport, 'patients.xlsx');

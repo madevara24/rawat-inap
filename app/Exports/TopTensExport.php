@@ -96,56 +96,31 @@ class TopTensExport implements FromView, WithTitle
     {
         $titleMonth = "";
         switch ($this->month) {
-            case '1':
-                $titleMonth = "Januari";
+            case '1':$titleMonth = "Januari";
                 break;
-
-            case '2':
-                $titleMonth = "Februari";
+            case '2':$titleMonth = "Februari";
                 break;
-
-            case '3':
-                $titleMonth = "Maret";
+            case '3':$titleMonth = "Maret";
                 break;
-
-            case '4':
-                $titleMonth = "April";
+            case '4':$titleMonth = "April";
                 break;
-
-            case '5':
-                $titleMonth = "Mei";
+            case '5':$titleMonth = "Mei";
                 break;
-
-            case '6':
-                $titleMonth = "Juni";
+            case '6':$titleMonth = "Juni";
                 break;
-
-            case '7':
-                $titleMonth = "Juli";
+            case '7':$titleMonth = "Juli";
                 break;
-
-            case '8':
-                $titleMonth = "Agustus";
+            case '8':$titleMonth = "Agustus";
                 break;
-
-            case '9':
-                $titleMonth = "September";
+            case '9':$titleMonth = "September";
                 break;
-
-            case '10':
-                $titleMonth = "Oktober";
+            case '10':$titleMonth = "Oktober";
                 break;
-
-            case '11':
-                $titleMonth = "November";
+            case '11':$titleMonth = "November";
                 break;
-
-            case '12':
-                $titleMonth = "Desember";
+            case '12':$titleMonth = "Desember";
                 break;
-
-            default:
-                $titleMonth = "";
+            default:$titleMonth = "";
                 break;
         }
 

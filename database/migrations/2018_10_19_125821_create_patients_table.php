@@ -25,7 +25,7 @@ class CreatePatientsTable extends Migration
             $table->enum('patient_type',['Lama','Baru']);
             $table->date('entry_date');
             $table->date('exit_date');
-            $table->enum('payment_type',['UM','ASK','JAMKESMAS','BPJS','KIS','SPM']);
+            $table->enum('payment_type',['UM','ASK','JAMKESMAS','JAMKESDA','BPJS','KIS','SPM']);
             $table->enum('release_note',['Pulang','Dirujuk','Meninggal > 48 jam','Meninggal < 48 jam']);
             $table->timestamps();
 
