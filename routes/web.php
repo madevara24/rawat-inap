@@ -11,13 +11,12 @@
 |
  */
 
-Route::get('/', function () {
-    return view('home');
-})->middleware('auth');
+Route::get('/', 'RecapsController@topTenChart')->name('topTenChart')->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'RecapsController@topTenChart')->name('topTenChart')->middleware('auth');
 Route::resource('classifications', 'ClassificationsController');
 Route::resource('diseases', 'DiseasesController');
 Route::resource('patients', 'PatientsController');
@@ -33,8 +32,10 @@ Route::get('/recaps/treatmentRegistration/', 'RecapsController@treatmentRegistra
 Route::post('/recaps/treatmentRegistration/redirect', 'RecapsController@treatmentRegistrationRedirect')->name('treatmentRegistrationRedirect');
 Route::post('/recaps/treatmentRegistration/download', 'RecapsController@treatmentRegistrationExport')->name('treatmentRegistrationExport');
 
+Route::get('/recaps/pelayananPerawatan', 'RecapsController@treatmentRecaps')->name('treatmentRecaps');
+Route::post('/recaps/pelayananPerawatan/download', 'RecapsController@treatmentRecapsExport')->name('treatmentRecapsExport');
+
 Route::get('/recaps/download', 'RecapsController@exportPatient')->name('exportPatient');
-Route::get('/recaps/querySandbox', 'RecapsController@querySandbox')->name('querySandbox');
 Route::post('/recaps/downloadCountRecap', 'RecapsController@downloadCountRecap')->name('downloadCountRecap');
 
 //SANDBOX

@@ -44,8 +44,8 @@
                     <th colspan="2" rowspan="2">DW</th>
                     <th colspan="2" rowspan="2">LW</th>
                     <th colspan="2" rowspan="2">Jumlah</th>
-                    <th colspan="4">< 48 JAM</th>
-                    <th colspan="4">> 48 JAM</th>
+                    <th colspan="4">{{"< 48 JAM"}}</th>
+                    <th colspan="4">{{"> 48 JAM"}}</th>
                 </tr>
                 <tr class="text-center">
                     @for ($i = 0; $i < 6; $i++)
@@ -61,8 +61,67 @@
                 </tr>
             </thead>
             <tbody>
-                
+                <tr>
+                    <td rowspan="4" class="text-center">1</td>
+                    <td class="text-center">Umum</td>
+                    @for ($i = 0; $i < 93; $i++)
+                        <td></td>
+                    @endfor
+                </tr>
+                <tr>
+                    <td class="text-center">{{"< 55"}}</td>
+                    @for ($i = 0; $i < 93; $i++)
+                        <td>{{$result[$i][0]}}</td>
+                    @endfor
+                </tr>
+                <tr>
+                    <td class="text-center">{{"> 55"}}</td>
+                    @for ($i = 0; $i < 93; $i++)
+                        <td>{{$result[$i][1]}}</td>
+                    @endfor
+                </tr>
+                <tr>
+                    <td class="text-center">Jumlah</td>
+                    @for ($i = 0; $i < 93; $i++)
+                        <td>{{$result[$i][2]}}</td>
+                    @endfor
+                </tr>
+                <tr>
+                    @for ($i = 0; $i < 95; $i++)
+                        <td></td>
+                    @endfor
+                </tr>
+                <tr>
+                    <td rowspan="4" class="text-center">2</td>
+                    <td class="text-center">Persalinan</td>
+                    @for ($i = 0; $i < 93; $i++)
+                        <td></td>
+                    @endfor
+                </tr>
+                <tr>
+                    <td class="text-center">{{"< 55"}}</td>
+                    @for ($i = 0; $i < 93; $i++)
+                        <td>{{$result[$i][3]}}</td>
+                    @endfor
+                </tr>
+                <tr>
+                    <td class="text-center">{{"> 55"}}</td>
+                    @for ($i = 0; $i < 93; $i++)
+                        <td>{{$result[$i][4]}}</td>
+                    @endfor
+                </tr>
+                <tr>
+                    <td class="text-center">Jumlah</td>
+                    @for ($i = 0; $i < 93; $i++)
+                        <td>{{$result[$i][5]}}</td>
+                    @endfor
+                </tr>
+                <tr>
+                    <td colspan="2">Jumlah 1 + 2</td>
+                    @for ($i = 0; $i < 93; $i++)
+                        <td>{{$result[$i][6]}}</td>
+                    @endfor
+                </tr>
             </tbody>
-                    
         </table>
         

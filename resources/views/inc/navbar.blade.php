@@ -23,11 +23,16 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="/recaps/treatmentRegistration">Data Pasien</a>
                     <a class="dropdown-item" href="/patients/create">Entry Data Pasien</a>
-                    <div role="separator" class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/recaps/dataKesakitan">Data Kesakitan</a>
-                    <a class="dropdown-item" href="/recaps/topTen">Data 10 Besar Penyakit</a>
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Data Rekap</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/recaps/dataKesakitan">Rekap Data Kesakitan</a>
+                        <a class="dropdown-item" href="/recaps/topTen">Rekap Data 10 Besar Penyakit</a>
+                        <a class="dropdown-item" href="/recaps/pelayananPerawatan">Rekap Data Pelayanan Perawatan</a>
+                    </div>
+                </li>
         </ul>
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">

@@ -47,7 +47,8 @@
         <table class="table table-striped table-sm">
             <thead class="thead-dark">
                 <tr class="text-center">
-                    <th>No RM</th>
+                    <th class="align-middle">No</th>
+                    <th class="align-middle">No RM</th>
                     <th class="align-middle">Nama</th>    
                     <th>Tanggal Lahir</th>
                     <th class="align-middle">Umur</th>
@@ -66,20 +67,22 @@
                 </tr>
             </thead>
             <tbody>
+                <?php $count = 1;?>
                 @foreach($patients as $patient)
                 <tr>
+                    <td>{{$count++}}</td>
                     <td>{{$patient->no_rm}}</td>
                     <td>{{$patient->name}}</td>
-                    <td>{{$patient->birthday}}</td>
-                    <td>{{$patient->age}}</td>
+                    <td>{{date('d F Y',strtotime($patient->birthday))}}</td>
+                    <td>{{$patient->age." tahun"}}</td>
                     <td>{{$patient->gender}}</td>
                     <td>{{$patient->treatment_type}}</td>
                     <td>{{$patient->patient_type}}</td>
                     <td>{{$patient->domicile}}</td>
                     <td>{{$patient->disease_name}}</td>
                     <td>{{$patient->disease_code}}</td>
-                    <td>{{$patient->entry_date}}</td>
-                    <td>{{$patient->exit_date}}</td>
+                    <td>{{date('d F Y',strtotime($patient->entry_date))}}</td>
+                    <td>{{date('d F Y',strtotime($patient->exit_date))}}</td>
                     <td class="text-right">{{$patient->duration}} Hari</td>
                     <td>{{$patient->release_note}}</td>
                     <td>{{$patient->payment_type}}</td>
@@ -96,6 +99,6 @@
             </tbody>
                     
         </table>
-        {{ $patients->links() }}
+        {{-- $patients->links() --}}
     </div>            
 @endsection
